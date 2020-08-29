@@ -10,4 +10,4 @@ $toEscaped = [regex]::escape($to)
 $fromDecodePath = wsl wslpath $fromEscaped
 $toDecodePath = wsl wslpath $toEscaped
 
-wsl rsync $option $fromDecodePath $toDecodePath
+wsl rsync $option $fromDecodePath $toDecodePath --exclude=node_modules
