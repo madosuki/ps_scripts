@@ -39,6 +39,8 @@ if($exclude_paths -ne "") {
     foreach($i in $exclude_paths.split(":")) {
         $excludePathList = $excludePathList + "--exclude=" + $i + " "
     }
+} else {
+    $excludePathList = " --exclude=node_modules "
 }
 
 $final = "wsl rsync " + $singleOptionList + $doubleOptionList + $fromDecodePath + " " + $toDecodePath + " " + $excludePathList
