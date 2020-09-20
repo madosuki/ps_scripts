@@ -14,11 +14,19 @@ if($help) {
     return
 }
 
-$fromEscaped = [regex]::escape($from)
-$toEscaped = [regex]::escape($to)
+$absoluteFromPath = Resolve-Path $from
+$absoluteToPath = Resolve-Path $to
+
+$fromEscaped = [regex]::escape($absoluteFromPath)
+$toEscaped = [regex]::escape($absoluteToPath)
 
 $fromDecodePath = wsl wslpath $fromEscaped
 $toDecodePath = wsl wslpath $toEscaped
+
+if($toDecodePath -eq $to) {
+    Write-Output("non mounted partition at wsl. If that partition are fine, try run wsl -t Ubuntu; maybe solve.")
+    return
+}
 
 $singleOptionList = ""
 if($single_options -ne "") {
