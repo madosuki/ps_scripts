@@ -14,10 +14,13 @@ function GetCollection {
 
 $collection = GetCollection
 
-$result = New-Object System.Collections.Generic.List[System.Object]
+$charList = New-Object System.Collections.Generic.List[System.Object]
 for ($i = 0; $i -lt $num; $i++) {
 	$tmp = [char]($collection | Get-Random)
-	$result.Add($tmp)
+	$charList.Add($tmp)
 }
 
--join $result
+$result = -join $charList
+
+$result | Set-Clipboard
+Write-Output $result
