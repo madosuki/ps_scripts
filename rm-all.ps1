@@ -1,1 +1,1 @@
-Remove-Item -Path $args -Recurse
+Remove-Item -Path $args -Recurse -Force
