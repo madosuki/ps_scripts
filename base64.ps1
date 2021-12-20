@@ -1,5 +1,5 @@
 param (
-    [Parameter(Mandatory=$True)][String]$text = "",
+    [Parameter(Mandatory, ValueFromPipeline)][string[]]$textArray,
     [switch]$decode,
     [switch]$clip
 )
@@ -20,14 +20,20 @@ function Decode {
 }
 
 $result = ""
-if ($decode) {
-    $result = Decode -target $text
-} else {
-    $result = Encode -target $text
-}
+foreach($text in $textArray) {
+    if ($result -ne "") {
+        $result += ", "
+    }
 
-if ($clip) {
-    $result | Set-Clipboard
-}
+    if ($decode) {
+        $result += (Decode -target $text)
+    } else {
+        $result += (Encode -target $text)
+    }
 
-Write-Output $result
+    if ($clip) {
+        $result | Set-Clipboard
+    }
+
+    Write-Output $result
+}
