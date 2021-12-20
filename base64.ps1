@@ -21,18 +21,19 @@ function Decode {
 
 $result = ""
 foreach($text in $textArray) {
+    $tmp = ""
+    if ($decode) {
+        $tmp = (Decode -target $text)
+    } else {
+        $tmp = (Encode -target $text)
+    }
+    Write-Output $tmp
+
     if ($result -ne "") {
         $result += "`r`n"
     }
-
-    if ($decode) {
-        $result += (Decode -target $text)
-    } else {
-        $result += (Encode -target $text)
-    }
+    $result += $tmp
 }
-
-Write-Output $result
 
 if ($clip) {
     $result | Set-Clipboard
