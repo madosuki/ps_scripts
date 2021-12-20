@@ -1,27 +1,33 @@
 param (
     [Parameter(Mandatory=$True)][String]$text = "",
-    [switch]$decode
+    [switch]$decode,
+    [switch]$clip
 )
 
 function Encode {
     param([string]$target)
     $byteArray = ([System.Text.Encoding]::Default).GetBytes($target)
     $encoded = [Convert]::ToBase64String($byteArray)
-    Write-Host $encoded
+    return $encoded
 }
 
 function Decode {
-    param (
-        [string]$target
-    )
+    param ([string]$target)
     
     $byteArray = [Convert]::FromBase64String($target)
     $decoded = [System.Text.Encoding]::Default.GetString($byteArray)
-    Write-Host $decoded
+    return $decoded
 }
 
+$result = ""
 if ($decode) {
-    Decode -target $text
+    $result = Decode -target $text
 } else {
-    Encode -target $text
+    $result = Encode -target $text
 }
+
+if ($clip) {
+    $result | Set-Clipboard
+}
+
+Write-Output $result
