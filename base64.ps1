@@ -31,9 +31,9 @@ foreach($text in $textArray) {
         $result += (Encode -target $text)
     }
 
-    if ($clip) {
-        $result | Set-Clipboard
-    }
-
     Write-Output $result
+}
+
+if ($clip) {
+    $result | Set-Clipboard
 }
