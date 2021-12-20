@@ -22,7 +22,7 @@ function Decode {
 $result = ""
 foreach($text in $textArray) {
     if ($result -ne "") {
-        $result += "\n"
+        $result += "`r`n"
     }
 
     if ($decode) {
@@ -30,9 +30,9 @@ foreach($text in $textArray) {
     } else {
         $result += (Encode -target $text)
     }
-
-    Write-Output $result
 }
+
+Write-Output $result
 
 if ($clip) {
     $result | Set-Clipboard
