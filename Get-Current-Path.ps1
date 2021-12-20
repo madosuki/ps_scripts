@@ -1,3 +1,11 @@
+param (
+    [switch]$clip
+)
+
 $path = Convert-Path .
-$path | Set-Clipboard
+
+if ($clip) {
+    $path | Set-Clipboard
+}
+
 Write-Output $path
