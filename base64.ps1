@@ -22,7 +22,7 @@ function Decode {
 $result = ""
 foreach($text in $textArray) {
     if ($result -ne "") {
-        $result += ", "
+        $result += "\n"
     }
 
     if ($decode) {
