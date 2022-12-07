@@ -1,0 +1,1 @@
+scoop update && scoop status | Select-Object -Property Name | ForEach-Object { scoop update $_.Name }
